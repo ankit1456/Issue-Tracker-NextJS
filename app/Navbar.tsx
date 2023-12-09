@@ -20,23 +20,25 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="flex items-center space-x-6 border-b mb-5 px-5 h-14">
+    <nav className="flex items-center space-x-6 border-b mb-5 px-5 h-14 shadow-md tracking-wide text-[.9rem]">
       <Link href="/">
-        <AiFillBug className="text-violet-600" />
+        <AiFillBug className="text-violet-900 text-lg" />
       </Link>
       <ul className="flex space-x-6">
         {links.map((link) => (
-          <Link
-            key={link.href}
-            className={classnames({
-              "text-zinc-950": link.href === currentPath,
-              "text-zinc-600": link.href !== currentPath,
-              "hover:text-zinc-950 transition-colors": true,
-            })}
-            href={link.href}
-          >
-            {link.label}
-          </Link>
+          <li key={link.href}>
+            <Link
+              className={classnames({
+                "bg-violet-900 p-2 text-white rounded-md":
+                  link.href === currentPath,
+                "text-zinc-950": link.href !== currentPath,
+                "transition-colors": true,
+              })}
+              href={link.href}
+            >
+              {link.label}
+            </Link>
+          </li>
         ))}
       </ul>
     </nav>
