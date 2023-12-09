@@ -29,7 +29,7 @@ const Navbar = () => {
           <li key={link.href}>
             <Link
               className={classnames({
-                "bg-violet-900 p-2 text-white rounded-md":
+                "bg-violet-900 p-1.5 px-2 text-white rounded-md":
                   link.href === currentPath,
                 "text-zinc-950": link.href !== currentPath,
                 "transition-colors": true,
