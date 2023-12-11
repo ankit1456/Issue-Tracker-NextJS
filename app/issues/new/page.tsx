@@ -7,8 +7,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import Spinner from "@/app/components/Spinner";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <Spinner />,
   ssr: false,
 });
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +30,7 @@ const NewIssuePage = () => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <div className="max-w-xl">
       {error && (
@@ -39,10 +41,12 @@ const NewIssuePage = () => {
       <form
         className=" space-y-3"
         onSubmit={handleSubmit(async (data) => {
+          setIsSubmitting(true);
           try {
             await axios.post("/api/issues", data);
             router.push("/issues");
           } catch (error) {
+            setIsSubmitting(false);
             setError("An unexpected error occured.");
           }
         })}
@@ -63,7 +67,9 @@ const NewIssuePage = () => {
 
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button className="!cursor-pointer">Create New Issue</Button>
+        <Button className="!cursor-pointer" disabled={isSubmitting}>
+          Create New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
