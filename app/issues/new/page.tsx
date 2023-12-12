@@ -9,13 +9,18 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import Spinner from "@/app/components/Spinner";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  loading: () => <Spinner />,
+  loading: () => (
+    <div className="h-96 max-w-xl">
+      <Skeleton height="100%" />,
+    </div>
+  ),
   ssr: false,
 });
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
+import Skeleton from "react-loading-skeleton";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
