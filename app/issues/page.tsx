@@ -1,5 +1,5 @@
 import prisma from "@/prisma/client";
-import { Table } from "@radix-ui/themes";
+import { Flex, Table } from "@radix-ui/themes";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
 import Link from "@/app/components/Link";
 import delay from "delay";
@@ -16,10 +16,10 @@ const IssuesPage = async () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
+            <Table.ColumnHeaderCell className="hidden sm:table-cell">
               Status
             </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
+            <Table.ColumnHeaderCell className="hidden sm:table-cell">
               Created At
             </Table.ColumnHeaderCell>
           </Table.Row>
@@ -29,17 +29,18 @@ const IssuesPage = async () => {
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
+                <Flex>
+                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                  <div className="ml-auto block sm:hidden">
+                    <IssueStatusBadge status={issue.status} />
+                  </div>
+                </Flex>
               </Table.Cell>
 
-              <Table.Cell className="hidden md:table-cell">
+              <Table.Cell className="hidden sm:table-cell">
                 <IssueStatusBadge status={issue.status} />
               </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
+              <Table.Cell className="hidden sm:table-cell">
                 {issue.createdAt.toDateString()}
               </Table.Cell>
             </Table.Row>
