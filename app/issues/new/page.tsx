@@ -1,23 +1,20 @@
 "use client";
 
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
-import "easymde/dist/easymde.min.css";
-import "react-loading-skeleton/dist/skeleton.css";
-import { useForm, Controller } from "react-hook-form";
+import { ErrorMessage, Skeleton, Spinner } from "@/app/components";
+import { createIssueSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Spinner from "@/app/components/Spinner";
-import Skeleton from "react-loading-skeleton";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   loading: () => <Skeleton height="20rem" />,
   ssr: false,
 });
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/validationSchemas";
-import { z } from "zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
