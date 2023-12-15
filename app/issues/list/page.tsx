@@ -2,6 +2,7 @@ import { IssueStatusBadge, Link } from "@/app/components";
 import prisma from "@/prisma/client";
 import { Flex, Table } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
+import ReactMarkdown from "react-markdown";
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
