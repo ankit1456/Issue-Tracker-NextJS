@@ -20,7 +20,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="flex items-center space-x-6 border-b mb-5 px-5 h-14 shadow-md tracking-wide text-[.9rem]">
+    <nav className="flex items-center space-x-6 border-b px-5 h-14 shadow-md tracking-wide text-[.9rem]">
       <Link href="/">
         <AiFillBug className="text-violet-600 text-lg" />
       </Link>

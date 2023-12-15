@@ -4,7 +4,7 @@ import { ErrorMessage, Spinner } from "@/app/components";
 import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Issue } from "@prisma/client";
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, Heading, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
@@ -52,7 +52,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className=" space-y-3" onSubmit={onSubmit}>
+      <form className="space-y-3" onSubmit={onSubmit}>
+        <Heading>{issue ? "Edit" : "Create New"} Issue</Heading>
         <TextField.Root>
           <TextField.Input
             defaultValue={issue?.title}
