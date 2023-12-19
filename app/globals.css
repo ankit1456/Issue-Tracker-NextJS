@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .nav-link {
+    @apply text-zinc-950 transition-colors;
+  }
+}
 :root {
   --foreground-rgb: 0, 0, 0;
 }
