@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const issueSchema = z.object({
   title: z.string().min(1, "Title is required").max(255),
-  description: z.string().min(1, "Description is required"),
+  description: z.string().min(1, "Description is required").max(65535),
 });
 
 export const updateIssueSchema = z.object({
@@ -10,7 +10,7 @@ export const updateIssueSchema = z.object({
   description: z
     .string()
     .min(1, "Description is required")
-    .max(65353)
+    .max(65535)
     .optional(),
 
   assignedToUserId: z
