@@ -1,7 +1,5 @@
+import Pagination from "./components/Pagination";
+
 export default function Home() {
-  return (
-    <main className="">
-      <h1>Hello world</h1>
-    </main>
-  );
+  return <Pagination itemsCount={100} pageSize={10} currentPage={2} />;
 }
