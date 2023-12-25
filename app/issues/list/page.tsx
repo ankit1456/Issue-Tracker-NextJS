@@ -5,9 +5,10 @@ import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Flex, Table } from "@radix-ui/themes";
 import NextLink from "next/link";
 import IssueActions from "./IssueActions";
+import Pagination from "@/app/components/Pagination";
 
 interface Props {
-  searchParams: { status: Status; orderBy: keyof Issue };
+  searchParams: { status: Status; orderBy: keyof Issue; page: string };
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -17,16 +18,24 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
+  const where = { status };
+
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 5;
+
   const issues = await prisma.issue.findMany({
-    where: {
-      status,
-    },
+    where,
     orderBy: searchParams.orderBy
       ? {
           [searchParams.orderBy]: "asc",
         }
       : undefined,
+
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
+
+  const issuesCount = await prisma.issue.count({ where });
 
   const columns: { label: string; value: keyof Issue; className?: string }[] = [
     { label: "Issue", value: "title" },
@@ -87,6 +96,12 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
+
+      <Pagination
+        pageSize={pageSize}
+        currentPage={page}
+        itemsCount={issuesCount}
+      />
     </div>
   );
 };
