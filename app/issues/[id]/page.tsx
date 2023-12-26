@@ -7,6 +7,7 @@ import AssigneeSelect from "./AssigneeSelect";
 import DeleteIssueButton from "./DeleteIssueButton";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
+import { title } from "process";
 
 interface Props {
   params: {
@@ -38,5 +39,14 @@ const IssueDetailPage = async ({ params }: Props) => {
     </Grid>
   );
 };
+
+export async function generateMetadata({ params }: Props) {
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+
+  return {
+    title: issue?.title,
+    description: "Deatails of issue " + issue?.id,
+  };
+}
 
 export default IssueDetailPage;
