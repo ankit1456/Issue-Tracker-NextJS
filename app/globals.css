@@ -20,3 +20,8 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+
+button{
+  cursor:pointer !important;
+}

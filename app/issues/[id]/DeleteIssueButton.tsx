@@ -23,57 +23,44 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
 
   return (
     <>
-      {/* <AlertDialog.Root>
+      <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button disabled={isDeleting} className="!cursor-pointer" color="red">
+          <Button color="red" disabled={isDeleting}>
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
-
         <AlertDialog.Content>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
-
           <AlertDialog.Description>
             Are you sure you want to delete this issue? This action cannot be
             undone.
           </AlertDialog.Description>
-
-          <Flex mt="4" gap="3">
+          <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
-              <Button className="!cursor-pointer" variant="soft" color="gray">
+              <Button variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
-
             <AlertDialog.Action>
-              <Button
-                className="!cursor-pointer"
-                onClick={handleDeleteIssue}
-                color="red"
-              >
+              <Button color="red" onClick={handleDeleteIssue}>
                 Delete Issue
               </Button>
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
-      </AlertDialog.Root> */}
-
-    <Button onClick={handleDeleteIssue}>Delete Issue</Button>
-
+      </AlertDialog.Root>
       <AlertDialog.Root open={error}>
         <AlertDialog.Content>
-          <AlertDialog.Title>OOPS! Something went wrong</AlertDialog.Title>
+          <AlertDialog.Title>OOPS!</AlertDialog.Title>
           <AlertDialog.Description>
             This issue could not be deleted.
           </AlertDialog.Description>
-
           <Button
-            className="!cursor-pointer"
-            variant="surface"
-            color="violet"
+            color="gray"
+            variant="soft"
+            mt="3"
             onClick={() => setError(false)}
-            mt="2"
           >
             OK
           </Button>

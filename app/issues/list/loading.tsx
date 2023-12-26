@@ -5,7 +5,7 @@ import IssueActions from "./IssueActions";
 const LoadingIssuePage = () => {
   const issues = [1, 2, 3, 4, 5];
   return (
-    <Flex gap="2" direction="column">
+    <Flex gap="6" direction="column">
       <IssueActions />
 
       <Table.Root variant="surface">
