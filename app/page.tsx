@@ -1,7 +1,5 @@
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  return <main>hello</main>;
+import LatestIssues from "./LatestIssues";
+
+export default function Home() {
+  return <LatestIssues />;
 }
