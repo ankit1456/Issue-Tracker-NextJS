@@ -18,6 +18,9 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
       .patch(`/api/issues/${issue.id}`, {
         assignedToUserId: userId !== "null" ? userId : null,
       })
+      .then(() =>
+        toast.success(userId === "null" ? "Issue Unassigned" : "Issue assigned")
+      )
       .catch(() => toast.error("Changes could not be saved"));
   };
 
