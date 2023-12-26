@@ -50,7 +50,10 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 const useUsers = () =>
   useQuery<User[]>({
     queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
+    queryFn: () =>
+      axios
+        .get("https://trackpulse.vercel.app/api/users")
+        .then((res) => res.data),
     staleTime: 60 * 1000, // 60s
     retry: 3,
   });
