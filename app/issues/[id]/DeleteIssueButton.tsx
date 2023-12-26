@@ -23,7 +23,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
 
   return (
     <>
-      <AlertDialog.Root>
+      {/* <AlertDialog.Root>
         <AlertDialog.Trigger>
           <Button disabled={isDeleting} className="!cursor-pointer" color="red">
             Delete Issue
@@ -57,7 +57,9 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
-      </AlertDialog.Root>
+      </AlertDialog.Root> */}
+
+    <Button onClick={handleDeleteIssue}>Delete Issue</Button>
 
       <AlertDialog.Root open={error}>
         <AlertDialog.Content>
