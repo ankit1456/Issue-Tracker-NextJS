@@ -28,3 +28,5 @@ export default async function Home() {
     </Grid>
   );
 }
+
+export const dynamic = "force-dynamic";
