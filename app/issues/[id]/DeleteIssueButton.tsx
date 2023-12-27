@@ -4,9 +4,9 @@ import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
-  const [error, setError] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const handleDeleteIssue = async () => {
@@ -17,13 +17,13 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
       router.refresh();
     } catch (error) {
       setIsDeleting(false);
-      setError(true);
+      toast.error("OOPS!, This issue could not be deleted");
     }
   };
 
   return (
     <>
-      <AlertDialog.Root>
+      {/* <AlertDialog.Root>
         <AlertDialog.Trigger>
           <Button color="red" disabled={isDeleting}>
             Delete Issue
@@ -49,8 +49,13 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
-      </AlertDialog.Root>
-      <AlertDialog.Root open={error}>
+      </AlertDialog.Root> */}
+
+      <Button color="red" onClick={handleDeleteIssue} disabled={isDeleting}>
+        Delete Issue
+        {isDeleting && <Spinner />}
+      </Button>
+      {/* <AlertDialog.Root open={error}>
         <AlertDialog.Content>
           <AlertDialog.Title>OOPS!</AlertDialog.Title>
           <AlertDialog.Description>
@@ -65,7 +70,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
             OK
           </Button>
         </AlertDialog.Content>
-      </AlertDialog.Root>
+      </AlertDialog.Root> */}
     </>
   );
 };
