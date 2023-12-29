@@ -1,18 +1,9 @@
 "use client";
 
 import { SunIcon } from "@radix-ui/react-icons";
-import {
-  Box,
-  Button,
-  Dialog,
-  Flex,
-  Select,
-  Text,
-  ThemeAccentColor,
-  ThemeAppearance,
-} from "@radix-ui/themes";
+import { Box, Button, Dialog, Flex, Select, Text } from "@radix-ui/themes";
 import { Dispatch, SetStateAction } from "react";
-import { Theme } from "./ThemeProvider";
+import { Theme, ThemeAccentColor, ThemeAppearance } from "./ThemeProvider";
 
 const themes = [
   { label: "Iris", value: "iris", colorCode: "#5a4fcf" },

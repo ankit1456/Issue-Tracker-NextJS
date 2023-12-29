@@ -1,9 +1,29 @@
 "use client";
 
-import { Theme, ThemeAccentColor, ThemeAppearance } from "@radix-ui/themes";
+import { Theme, ThemeAccentColor } from "@radix-ui/themes";
 import { PropsWithChildren, useState } from "react";
 import Navbar from "./Navbar";
 import ThemeSwitcher from "./ThemeSwitcher";
+
+export type ThemeAppearance = "dark" | "light";
+export type ThemeAccentColor =
+  | "iris"
+  | "indigo"
+  | "violet"
+  | "green"
+  | "grass"
+  | "cyan"
+  | "blue"
+  | "brown"
+  | "crimson"
+  | "tomato"
+  | "teal"
+  | "ruby"
+  | "red"
+  | "orange"
+  | "jade"
+  | "plum"
+  | "purple";
 
 export type Theme = {
   mode: ThemeAppearance;
