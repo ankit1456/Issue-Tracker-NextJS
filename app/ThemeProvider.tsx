@@ -1,6 +1,6 @@
 "use client";
 
-import { Theme, ThemeAccentColor } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import { PropsWithChildren, useState } from "react";
 import Navbar from "./Navbar";
 import ThemeSwitcher from "./ThemeSwitcher";
