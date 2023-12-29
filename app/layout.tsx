@@ -1,12 +1,12 @@
+import { Container } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import "./theme-config.css";
-import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "./Navbar";
-import { Container, Theme } from "@radix-ui/themes";
-import AuthProvider from "./auth/Provider";
 import QueryClientProvider from "./QueryClientProvider";
+import ThemeProvider from "./ThemeProvider";
+import AuthProvider from "./auth/Provider";
+import "./globals.css";
+import "./theme-config.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -18,19 +18,18 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme appearance="light" accentColor="violet">
-              <Navbar />
+            <ThemeProvider>
               <main className="p-5 pt-7">
                 <Container>{children}</Container>
               </main>
-            </Theme>
+            </ThemeProvider>
           </AuthProvider>
         </QueryClientProvider>
       </body>

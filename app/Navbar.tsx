@@ -1,10 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AiFillBug } from "react-icons/ai";
-import classnames from "classnames";
-import { useSession } from "next-auth/react";
 import { Skeleton } from "@/app/components";
 import {
   Avatar,
@@ -13,20 +8,30 @@ import {
   DropdownMenu,
   Flex,
   Text,
+  useThemeContext,
 } from "@radix-ui/themes";
+import classnames from "classnames";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { PropsWithChildren } from "react";
+import { AiFillBug } from "react-icons/ai";
 
-const Navbar = () => {
+const Navbar = ({ children }: PropsWithChildren) => {
   return (
     <nav className="border-b py-4 px-5 shadow-md tracking-wide text-[.9rem]">
       <Container>
         <Flex justify="between">
           <Flex align="center" gap="3">
             <Link href="/">
-              <AiFillBug className="text-violet-600 text-lg" />
+              <AiFillBug className="text-xl logo" />
             </Link>
             <NavLinks />
           </Flex>
-          <AuthStatus />
+          <Flex gap="4" align="center">
+            <AuthStatus />
+            {children}
+          </Flex>
         </Flex>
       </Container>
     </nav>
@@ -73,6 +78,8 @@ const AuthStatus = () => {
 };
 
 const NavLinks = () => {
+  const { appearance } = useThemeContext();
+
   const currentPath = usePathname();
 
   const links = [
@@ -85,15 +92,26 @@ const NavLinks = () => {
       href: "/issues/list",
     },
   ];
+
   return (
     <ul className="flex space-x-6">
       {links.map((link) => (
         <li key={link.href}>
           <Link
+            style={
+              link.href === currentPath
+                ? {
+                    backgroundColor: "var(--accent-9)",
+                    color:
+                      appearance === "dark"
+                        ? "var(--white-a11)"
+                        : "var(--accent-1)",
+                  }
+                : {}
+            }
             className={classnames({
               "nav-link": true,
-              "bg-violet-600 p-1.5 px-2 !text-white rounded-md":
-                link.href === currentPath,
+              "p-1.5 px-2 rounded-md": link.href === currentPath,
             })}
             href={link.href}
           >

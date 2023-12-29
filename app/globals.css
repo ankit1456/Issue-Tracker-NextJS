@@ -4,7 +4,7 @@
 
 @layer utilities {
   .nav-link {
-    @apply text-zinc-950 transition-colors;
+    @apply transition-colors;
   }
 }
 :root {
@@ -21,7 +21,10 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
+button {
+  cursor: pointer !important;
+}
 
-button{
-  cursor:pointer !important;
+.logo {
+  color: var(--accent-10);
 }

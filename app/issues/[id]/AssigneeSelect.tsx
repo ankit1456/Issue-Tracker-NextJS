@@ -4,11 +4,33 @@ import { Skeleton } from "@/app/components";
 import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
-  const { data: users, error, isLoading } = useUsers();
+  // const { data: users, error, isLoading } = useUsers();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.get<User[]>("/api/users");
+        setUsers(data);
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          setError(error.message);
+        }
+      }
+      setIsLoading(false);
+    };
+
+    fetchUser();
+  }, []);
 
   if (isLoading) return <Skeleton height="2rem" />;
   if (error) return null;
@@ -31,7 +53,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         onValueChange={assignIssue}
       >
         <Select.Trigger placeholder="Assign" />
-        <Select.Content>
+        <Select.Content position="popper">
           <Select.Group>
             {/* <Select.Label>Suggestions</Select.Label> */}
 
