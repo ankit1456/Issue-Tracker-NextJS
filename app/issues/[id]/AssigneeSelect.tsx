@@ -25,8 +25,9 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         if (error instanceof AxiosError) {
           setError(error.message);
         }
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchUser();

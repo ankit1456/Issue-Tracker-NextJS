@@ -9,15 +9,18 @@ import toast from "react-hot-toast";
 const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
+
   const handleDeleteIssue = async () => {
+    setIsDeleting(true);
+
     try {
-      setIsDeleting(true);
       await axios.delete(`/api/issues/${issueId}`);
       router.push("/issues/list");
       router.refresh();
     } catch (error) {
-      setIsDeleting(false);
       toast.error("OOPS!, This issue could not be deleted");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
